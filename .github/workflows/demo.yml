@@ -36,7 +36,7 @@ jobs:
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
-      - name: Get upload artifacts
+      - name: Get build artifacts
         uses: actions/download-artifact@v8
         with:
           name: dist-files
