@@ -16,7 +16,7 @@ jobs:
       - name: Test code
         run: npm run test
   build:
-    needs: test
+    needs: [ test ]
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -32,10 +32,15 @@ jobs:
           path: |
             dist
             package.json
-          
   deploy:
-    needs: build
+    needs: [ build ]
     runs-on: ubuntu-latest
     steps:
+      - name: Get upload artifacts
+        uses: actions/download-artifact@v8
+        with:
+          name: dist-files
+      - name: Output contents
+        run: ls
       - name: Deploy
         run: echo "Deploying..."
